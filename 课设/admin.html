@@ -1,0 +1,77 @@
+<!--
+ * @Author: your name
+ * @Date: 2022-12-17 14:57:42
+ * @LastEditTime: 2022-12-17 20:20:58
+ * @LastEditors: DESKTOP-2OD8ACM
+ * @Description: In User Settings Edit
+ * @FilePath: \课设\admin.html
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="./css/admin.css">
+		<title>信息管理系统</title>
+	</head>
+	<body>
+		<div class="head">
+			<div class="head-left">
+				<img src="images/logo.jpg" height="70px">
+			</div>
+			<div class="head-right">
+				<div class="head-right-top">
+					<ul>
+						<li class="tuichu" onclick=logout()>退出</li>
+						<li><img src="images/tuichu.svg"></li>
+						<li>欢迎使用二次压降检测仪检定系统!</li>
+						<li><img src="images/huanying.svg"></li>					
+					</ul>
+				</div>
+				<div class="head-right-bottom">
+					<ul>
+						<li><a href="./admin/connect.html"><img src="images/jianding.svg"><p>开始检定</p></li></a>
+						<li><a href="#"><img src="images/dayin.svg"><p>打印报告</p></li></a>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="content-left">
+			<div class="left_1">
+				<a href="#"><img src="images/shouye.svg">
+				<p>首页</p></a>
+			</div>
+			<div class="left_1">
+				<a href="#"><img src="images/shujufenxi.svg">
+				<p>数据分析</p></a>
+			</div>
+			<div class="left_1">
+				<a href="#"><img src="images/lishishuju.svg">
+				<p>历史数据</p></a>
+			</div>
+			<div class="left_1">
+				<a href="#"><img src="images/xitongguanli.svg">
+				<p>系统设置</p></a>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="huanyin">
+				<h1>欢迎使用二次压降检测仪检定系统</h1>
+				<p>使用手册：</p>
+				<p>1、点击上方开始检定开始进行二次压降检测仪的检定</p>
+				<p>2、点击上方打印报告可以打印二次压降检测仪的检定报告</p>
+				<p>3、左侧数据分析可以对历史检定情况进行分析</p>
+				<p>4、左侧历史数据能够查看历史情况</p>
+			</div>
+			
+		</div>
+	</body>
+</html>
+<script>
+    function logout(){
+        if (window.confirm('是否退出?')) {
+            window.location.href = 'login.html';
+        } else {
+            return false;
+        }
+    }
+</script>

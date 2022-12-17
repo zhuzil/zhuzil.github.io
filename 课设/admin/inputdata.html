@@ -1,0 +1,183 @@
+<!--
+ * @Author: your name
+ * @Date: 2022-12-17 21:28:00
+ * @LastEditTime: 2022-12-17 22:51:04
+ * @LastEditors: DESKTOP-2OD8ACM
+ * @Description: In User Settings Edit
+ * @FilePath: \课设\admin\inputdata.html
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../css/admin.css">
+		<title>信息管理系统</title>
+	</head>
+	<body>
+		<div class="head">
+			<div class="head-left">
+				<img src="../images/logo.jpg" height="70px">
+			</div>
+			<div class="head-right">
+				<div class="head-right-top">
+					<ul>
+						<li class="tuichu" onclick=logout()>退出</li>
+						<li><img src="../images/tuichu.svg"></li>
+						<li>欢迎使用二次压降检测仪检定系统!</li>
+						<li><img src="../images/huanying.svg"></li>					
+					</ul>
+				</div>
+				<div class="head-right-bottom">
+					<ul>
+						<li><a href="./connect.html"><img src="../images/jianding.svg"><p>开始检定</p></li></a>
+						<li><a href="#"><img src="../images/dayin.svg"><p>打印报告</p></li></a>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="content-left">
+            <div class="left_1">
+				<a href="../admin.html"><img src="../images/shouye.svg">
+				<p>首页</p></a>
+			</div>
+			<div class="left_1">
+				<a href="#"><img src="../images/shujufenxi.svg">
+				<p>数据分析</p></a>
+			</div>
+			<div class="left_1">
+				<a href="#"><img src="../images/lishishuju.svg">
+				<p>历史数据</p></a>
+			</div>
+            <div class="left_1">
+				<a href="#"><img src="../images/xitongguanli.svg">
+				<p>系统设置</p></a>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="form">
+				<form action="#" method="post">
+					<table class="inputdata">
+                        <tr>
+							<h1 class="form-title">
+								第二步：实验输入数据
+							</h1>
+						</tr>
+						<tr>
+                            <!-- th为表格标题栏-->
+                            <th>项目</th>
+                            <th>挡位</th>
+                            <th>百分比</th>
+                            <th>数据上限</th>
+                            <th>数据下限</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input name="PT1" type="checkbox" value="" id="PT1"/>PT1 </label>
+                            </td>
+                            <td>100V</td>
+                            <td>20%</td>
+                            <td>19.6%</td>
+                            <td>20.4%</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input name="PT2" type="checkbox" value="" id="PT2" />PT2 </label>
+                            </td>
+                            <td>100V</td>
+                            <td>100%</td>
+                            <td>98.0%</td>
+                            <td>102.0%</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input name="CT1" type="checkbox" value=""  id="CT1"/>CT1 </label>
+                            </td>
+                            <td>5A</td>
+                            <td>5%</td>
+                            <td>4.90%</td>
+                            <td>5.1%</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input name="CT2" type="checkbox" value=""  id="CT2"/>CT2 </label>
+                            </td>
+                            <td>5A</td>
+                            <td>100%</td>
+                            <td>98.0%</td>
+                            <td>102.0%</td>
+                        </tr>
+					</table>
+                    <button onclick=mysubmit() id="btn_sub">提交</button>
+				</form>
+            </div>
+		</div>
+	</body>
+</html>
+<style type="text/css">
+/* inputdata样式 */           
+.inputdata table {
+	width: 90%;
+	background: #ccc;
+	margin: 10px auto;
+	border-collapse: collapse;
+	/*border-collapse:collapse合并内外边距
+	(去除表格单元格默认的2个像素内外边距*/ 
+}               
+.inputdata th,td {
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	border: 1px solid #ccc;
+}       
+
+.inputdata th {
+	background: #eee;
+	font-weight: normal;
+	width: 100px;
+	height: 30px;
+}       
+.inputdata tr {
+	background: #fff;
+}       
+.inputdata tr:hover {
+	background: #cc0;
+}       
+.inputdata td a {
+	color: #06f;
+	text-decoration: none;
+}       
+.inputdata td a:hover {
+	color: #06f;
+	text-decoration: underline;
+}
+#btn_sub{
+	float: right;
+}
+</style>
+<script>
+    function logout(){
+        if (window.confirm('是否退出?')) {
+            window.location.href = '../login.html';
+        } else {
+            return false;
+        }
+    }
+
+    function mysubmit(){
+        PT1 = document.getElementById("PT1");
+        PT2 = document.getElementById("PT2");
+        CT1 = document.getElementById("CT1");
+        CT2 = document.getElementById("CT2");
+
+        if(PT1.checked | PT2.checked | CT1.checked | CT2.checked)
+        {
+            window.location.href = './loading.html';
+            window.event.returnValue=false;
+            return false
+        }
+
+        alert("请选择项目！")
+    }
+    
+    
+</script>

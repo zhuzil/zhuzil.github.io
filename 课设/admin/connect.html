@@ -1,0 +1,143 @@
+<!--
+ * @Author: your name
+ * @Date: 2022-12-17 19:46:08
+ * @LastEditTime: 2022-12-17 22:29:44
+ * @LastEditors: DESKTOP-2OD8ACM
+ * @Description: In User Settings Edit
+ * @FilePath: \课设\admin\connect.html
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../css/admin.css">
+		<title>信息管理系统</title>
+	</head>
+	<body>
+		<div class="head">
+			<div class="head-left">
+				<img src="../images/logo.jpg" height="70px">
+			</div>
+			<div class="head-right">
+				<div class="head-right-top">
+					<ul>
+						<li class="tuichu" onclick=logout()>退出</li>
+						<li><img src="../images/tuichu.svg"></li>
+						<li>欢迎使用二次压降检测仪检定系统!</li>
+						<li><img src="../images/huanying.svg"></li>					
+					</ul>
+				</div>
+				<div class="head-right-bottom">
+					<ul>
+						<li><a href="./connect.html"><img src="../images/jianding.svg"><p>开始检定</p></li></a>
+						<li><a href="#"><img src="../images/dayin.svg"><p>打印报告</p></li></a>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="content-left">
+            <div class="left_1">
+				<a href="../admin.html"><img src="../images/shouye.svg">
+				<p>首页</p></a>
+			</div>
+			<div class="left_1">
+				<a href="#"><img src="../images/shujufenxi.svg">
+				<p>数据分析</p></a>
+			</div>
+			<div class="left_1">
+				<a href="#"><img src="../images/lishishuju.svg">
+				<p>历史数据</p></a>
+			</div>
+            <div class="left_1">
+				<a href="#"><img src="../images/xitongguanli.svg">
+				<p>系统设置</p></a>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="form">
+				<form action="#" method="post">
+					<table>
+						<tr>
+							<h1 class="form-title">
+								第一步：输入设备信息
+							</h1>
+						</tr>
+                        <tr>
+                            <td class="td_left"><label for="cn">连接设备：</label></td>
+                            <td class="td_right">
+                                <button type="button" onclick=conncet()>点击连接设备</button>
+                            </td>
+                        </tr>
+						<tr>
+							<td class="td_left"><label for="pID">产品编号：</label></td>
+							<td class="td_right"><input type="text" name="pID" placeholder="请输入产品编号"
+														id="pID"></td>
+						</tr>
+						<tr>
+							<td class="td_left"><label for="zzs">制造商：</label></td>
+							<td class="td_right"><input type="text" name="zzs" placeholder="请输入制造商"
+														id="zzs"></td>
+						</tr>
+						<tr>
+							<td class="td_left"><label for="cpmc">产品名称：</label></td>
+							<td class="td_right"><input type="text" name="cpmc" placeholder="请输入产品名称"
+														id="cpmc"></td>
+						</tr>
+						<!-- <tr>
+							<td class="td_left"><label>性别</label></td>
+							<td class="td_right"><input type="radio" name="gender" value="male" checked> 男
+								<input type="radio" name="gender" value="female"> 女
+							</td>
+						</tr> -->
+						<tr>
+							<td class="td_left"><label for="scrq">生产日期</label></td>
+							<td class="td_right"><input type="date" name="scrq" id="scrq"></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center" type="button" onclick=mysubmit()><input type="submit" value="下一步" id="btn_sub" ></td>
+						</tr>
+					</table>
+				</form>
+            </div>
+		</div>
+	</body>
+</html>
+<script>
+    window.isConnect = false;
+    
+    function logout(){
+        if (window.confirm('是否退出?')) {
+            window.location.href = '../login.html';
+        } else {
+            return false;
+        }
+    }
+    function conncet(){
+        window.isConnect = true
+        alert("连接成功")
+    }
+    function mysubmit()
+    {
+        var pID = document.getElementById("pID");
+        var zzs = document.getElementById("zzs");
+        var cpmc = document.getElementById("cpmc");
+        var scrq = document.getElementById("scrq");
+        if(window.isConnect != true)
+        {
+            alert("请先连接设备！")
+            return
+        }
+        
+        if(pID.value=="" || zzs.value=="" ||cpmc.value=="" ||scrq.value=="" )
+        {
+            alert("请填写完整信息！");
+            return
+        }
+
+        window.location.href = './inputdata.html';
+        window.event.returnValue=false;
+        return false
+
+    }
+    
+</script>
