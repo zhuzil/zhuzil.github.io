@@ -23,7 +23,7 @@
   <meta name="description" content="先简单介绍一下。直接使用腾讯云或者百度云的接口的方法我就不过多赘述了，我觉得他们的开发文档写的蛮好，直接对着做就行了。我的工作主要就是将腾讯云的 api 接口进行了简单的封装，免去了环境配置和身份认证过程，只需要密钥和图片就能直接进行识别，甚至密钥也可以不用，大大方便了同学们的操作。同时也在刘同学的帮助下实现了 paddlepaddle 模型的接口，后续还会再加上其他更多的预训练模型，提供更多的选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OCR接口使用文档">
-<meta property="og:url" content="http://example.com/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:url" content="http://example.com/2023/03/02/yuque/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/index.html">
 <meta property="og:site_name" content="Xuanyu Zhu&#39;s Blog">
 <meta property="og:description" content="先简单介绍一下。直接使用腾讯云或者百度云的接口的方法我就不过多赘述了，我觉得他们的开发文档写的蛮好，直接对着做就行了。我的工作主要就是将腾讯云的 api 接口进行了简单的封装，免去了环境配置和身份认证过程，只需要密钥和图片就能直接进行识别，甚至密钥也可以不用，大大方便了同学们的操作。同时也在刘同学的帮助下实现了 paddlepaddle 模型的接口，后续还会再加上其他更多的预训练模型，提供更多的选">
 <meta property="og:locale" content="zh_CN">
@@ -32,12 +32,12 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/29592860/1677682486923-fd88aba2-6377-4188-9e25-23f0d60fddb7.png#averageHue=%238cb9d2&clientId=ua7e4239c-2981-4&from=paste&id=A5sOJ&name=image.png&originHeight=774&originWidth=1899&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=261869&status=done&style=none&taskId=u53c95081-8c0b-41b5-9d57-e5b5f9177b5&title=">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/29592860/1677682487003-5ff99c5c-77f0-4203-91f1-5e45099e0662.png#averageHue=%23d2dfcf&clientId=ua7e4239c-2981-4&from=paste&id=J5hq3&name=image.png&originHeight=898&originWidth=2245&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=141754&status=done&style=none&taskId=u9f6a1aa2-4f47-4710-ad5b-4cec3d8bd80&title=">
 <meta property="article:published_time" content="2023-03-02T08:20:15.000Z">
-<meta property="article:modified_time" content="2023-03-03T03:23:45.626Z">
+<meta property="article:modified_time" content="2023-03-03T15:07:21.705Z">
 <meta property="article:author" content="Xuanyu Zhu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/jpeg/29592860/1677745529310-564c74fe-2cf7-44c5-bdeb-64a17453ab91.jpeg#averageHue=%23717681&clientId=u2eec852a-cfae-4&from=drop&id=yxu05&name=test.jpg&originHeight=427&originWidth=640&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=38882&status=done&style=none&taskId=ubb9bb088-d91d-4b6c-88bf-04a760730a6&title=">
 
-<link rel="canonical" href="http://example.com/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">
+<link rel="canonical" href="http://example.com/2023/03/02/yuque/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">
 
 
 <script id="page-configurations">
@@ -156,7 +156,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/02/yuque/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-03 11:23:45" itemprop="dateModified" datetime="2023-03-03T11:23:45+08:00">2023-03-03</time>
+                <time title="修改时间：2023-03-03 23:07:21" itemprop="dateModified" datetime="2023-03-03T23:07:21+08:00">2023-03-03</time>
               </span>
 
           
@@ -355,6 +355,13 @@
 
 
         
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/13/yuque/%F0%9F%92%A1%201%20%E5%88%86%E9%92%9F%E7%8E%A9%E8%BD%AC%E8%AF%AD%E9%9B%80%E6%96%87%E6%A1%A3/" rel="prev" title="💡 1 分钟玩转语雀文档">
+      <i class="fa fa-chevron-left"></i> 💡 1 分钟玩转语雀文档
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
     
   </article>
@@ -426,7 +433,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
