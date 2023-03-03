@@ -1,104 +1,204 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>OCR接口使用文档 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
   <meta name="description" content="先简单介绍一下。直接使用腾讯云或者百度云的接口的方法我就不过多赘述了，我觉得他们的开发文档写的蛮好，直接对着做就行了。我的工作主要就是将腾讯云的 api 接口进行了简单的封装，免去了环境配置和身份认证过程，只需要密钥和图片就能直接进行识别，甚至密钥也可以不用，大大方便了同学们的操作。同时也在刘同学的帮助下实现了 paddlepaddle 模型的接口，后续还会再加上其他更多的预训练模型，提供更多的选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OCR接口使用文档">
 <meta property="og:url" content="http://example.com/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Xuanyu Zhu&#39;s Blog">
 <meta property="og:description" content="先简单介绍一下。直接使用腾讯云或者百度云的接口的方法我就不过多赘述了，我觉得他们的开发文档写的蛮好，直接对着做就行了。我的工作主要就是将腾讯云的 api 接口进行了简单的封装，免去了环境配置和身份认证过程，只需要密钥和图片就能直接进行识别，甚至密钥也可以不用，大大方便了同学们的操作。同时也在刘同学的帮助下实现了 paddlepaddle 模型的接口，后续还会再加上其他更多的预训练模型，提供更多的选">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/jpeg/29592860/1677745529310-564c74fe-2cf7-44c5-bdeb-64a17453ab91.jpeg#averageHue=%23717681&clientId=u2eec852a-cfae-4&from=drop&id=yxu05&name=test.jpg&originHeight=427&originWidth=640&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=38882&status=done&style=none&taskId=ubb9bb088-d91d-4b6c-88bf-04a760730a6&title=">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/jpeg/29592860/1677746056372-956d66b8-13c5-408f-894d-723905b9cf45.jpeg#averageHue=%23d3d3d3&clientId=u2eec852a-cfae-4&from=drop&id=DB4OA&name=test1_cor.jpg&originHeight=361&originWidth=475&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=108290&status=done&style=none&taskId=ua0d28784-5e44-4011-b0ea-e93b30c9cef&title=">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/29592860/1677682486923-fd88aba2-6377-4188-9e25-23f0d60fddb7.png#averageHue=%238cb9d2&clientId=ua7e4239c-2981-4&from=paste&id=A5sOJ&name=image.png&originHeight=774&originWidth=1899&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=261869&status=done&style=none&taskId=u53c95081-8c0b-41b5-9d57-e5b5f9177b5&title=">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/29592860/1677682487003-5ff99c5c-77f0-4203-91f1-5e45099e0662.png#averageHue=%23d2dfcf&clientId=ua7e4239c-2981-4&from=paste&id=J5hq3&name=image.png&originHeight=898&originWidth=2245&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=141754&status=done&style=none&taskId=u9f6a1aa2-4f47-4710-ad5b-4cec3d8bd80&title=">
 <meta property="article:published_time" content="2023-03-02T08:20:15.000Z">
 <meta property="article:modified_time" content="2023-03-03T03:23:45.626Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Xuanyu Zhu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/jpeg/29592860/1677745529310-564c74fe-2cf7-44c5-bdeb-64a17453ab91.jpeg#averageHue=%23717681&clientId=u2eec852a-cfae-4&from=drop&id=yxu05&name=test.jpg&originHeight=427&originWidth=640&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=38882&status=done&style=none&taskId=ubb9bb088-d91d-4b6c-88bf-04a760730a6&title=">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<link rel="canonical" href="http://example.com/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
+  <title>OCR接口使用文档 | Xuanyu Zhu's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
-</header>
 
-      <div class="outer">
-        <section id="main"><article id="post-OCR接口使用文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="dt-published" datetime="2023-03-02T08:20:15.000Z" itemprop="datePublished">2023-03-02</time>
-</a>
-    
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Xuanyu Zhu's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Blog</p>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      OCR接口使用文档
-    </h1>
-  
 
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xuanyu Zhu">
+      <meta itemprop="description" content="Xuanyu Zhu Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xuanyu Zhu's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OCR接口使用文档
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-02 16:20:15" itemprop="dateCreated datePublished" datetime="2023-03-02T16:20:15+08:00">2023-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-03 11:23:45" itemprop="dateModified" datetime="2023-03-03T11:23:45+08:00">2023-03-03</time>
+              </span>
+
+          
+
+        </div>
       </header>
+
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
         <p>先简单介绍一下。<br>直接使用腾讯云或者百度云的接口的方法我就不过多赘述了，我觉得他们的开发文档写的蛮好，直接对着做就行了。我的工作主要就是将腾讯云的 api 接口进行了简单的封装，免去了环境配置和身份认证过程，只需要密钥和图片就能直接进行识别，甚至密钥也可以不用，大大方便了同学们的操作。<br>同时也在刘同学的帮助下实现了 paddlepaddle 模型的接口，后续还会再加上其他更多的预训练模型，提供更多的选择，同时后续我们还会将各个模型性能对比进行分析，为选择提供参考。<br>一些常用语言的 demo 在下方有<a href="#zH7dz">具体实例</a>，复制粘贴就能用了。</p>
 <h2 id="腾讯云-api-封装接口"><a href="#腾讯云-api-封装接口" class="headerlink" title="腾讯云 api 封装接口"></a>腾讯云 api 封装接口</h2><div style="background: #FFFBE6;padding:10px;border: 1px solid #C3C3C3;border-radius:5px;margin-bottom:5px;">
@@ -243,117 +343,183 @@
 <h3 id="Cpp-示例"><a href="#Cpp-示例" class="headerlink" title="Cpp 示例"></a>Cpp 示例</h3><p>需要引入库的 HTTP 函数</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;HTTPRequest.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> std::string base64_chars =</span><br><span class="line"><span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span></span><br><span class="line"><span class="string">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span></span><br><span class="line"><span class="string">&quot;0123456789+/&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">bool</span> <span class="title">is_base64</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">isalnum</span>(c) || (c == <span class="string">&#x27;+&#x27;</span>) || (c == <span class="string">&#x27;/&#x27;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">base64_encode</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* bytes_to_encode, <span class="type">unsigned</span> <span class="type">int</span> in_len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string ret;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> char_array_3[<span class="number">3</span>];</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> char_array_4[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (in_len--)</span><br><span class="line">        &#123;</span><br><span class="line">            char_array_3[i++] = *(bytes_to_encode++);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">3</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                char_array_4[<span class="number">0</span>] = (char_array_3[<span class="number">0</span>] &amp; <span class="number">0xfc</span>) &gt;&gt; <span class="number">2</span>;</span><br><span class="line">                char_array_4[<span class="number">1</span>] = ((char_array_3[<span class="number">0</span>] &amp; <span class="number">0x03</span>) &lt;&lt; <span class="number">4</span>) + ((char_array_3[<span class="number">1</span>] &amp; <span class="number">0xf0</span>) &gt;&gt; <span class="number">4</span>);</span><br><span class="line">                char_array_4[<span class="number">2</span>] = ((char_array_3[<span class="number">1</span>] &amp; <span class="number">0x0f</span>) &lt;&lt; <span class="number">2</span>) + ((char_array_3[<span class="number">2</span>] &amp; <span class="number">0xc0</span>) &gt;&gt; <span class="number">6</span>);</span><br><span class="line">                char_array_4[<span class="number">3</span>] = char_array_3[<span class="number">2</span>] &amp; <span class="number">0x3f</span>;</span><br><span class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; (i &lt; <span class="number">4</span>); i++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        ret += base64_chars[char_array_4[i]];</span><br><span class="line">                    &#125;</span><br><span class="line">                i = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span> (i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = i; j &lt; <span class="number">3</span>; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                char_array_3[j] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        char_array_4[<span class="number">0</span>] = (char_array_3[<span class="number">0</span>] &amp; <span class="number">0xfc</span>) &gt;&gt; <span class="number">2</span>;</span><br><span class="line">        char_array_4[<span class="number">1</span>] = ((char_array_3[<span class="number">0</span>] &amp; <span class="number">0x03</span>) &lt;&lt; <span class="number">4</span>) + ((char_array_3[<span class="number">1</span>] &amp; <span class="number">0xf0</span>) &gt;&gt; <span class="number">4</span>);</span><br><span class="line">        char_array_4[<span class="number">2</span>] = ((char_array_3[<span class="number">1</span>] &amp; <span class="number">0x0f</span>) &lt;&lt; <span class="number">2</span>) + ((char_array_3[<span class="number">2</span>] &amp; <span class="number">0xc0</span>) &gt;&gt; <span class="number">6</span>);</span><br><span class="line">        char_array_4[<span class="number">3</span>] = char_array_3[<span class="number">2</span>] &amp; <span class="number">0x3f</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; (j &lt; i + <span class="number">1</span>); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                ret += base64_chars[char_array_4[j]];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> ((i++ &lt; <span class="number">3</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                ret += <span class="string">&#x27;=&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    fstream f;</span><br><span class="line">    f.<span class="built_in">open</span>(<span class="string">&quot;test.jpg&quot;</span>, ios::in | ios::binary);</span><br><span class="line">    f.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios_base::end);     <span class="comment">//设置偏移量至文件结尾</span></span><br><span class="line">    std::streampos sp = f.<span class="built_in">tellg</span>();      <span class="comment">//获取文件大小</span></span><br><span class="line">    <span class="type">int</span> size = sp;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span>* buffer = (<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">char</span>) * size);</span><br><span class="line">    f.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ios_base::beg);     <span class="comment">//设置偏移量至文件开头</span></span><br><span class="line">    f.<span class="built_in">read</span>(buffer, size);                <span class="comment">//将文件内容读入buffer</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;file size:&quot;</span> &lt;&lt; size &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    string imgBase64 = <span class="built_in">base64_encode</span>(buffer, size);         <span class="comment">//编码</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;img base64 encode size:&quot;</span> &lt;&lt; imgBase64.<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        http::Request request&#123; <span class="string">&quot;http://www.7-an.com:5000/api/paddle&quot;</span> &#125;;</span><br><span class="line">        <span class="comment">// c++的Json比较复杂，没有使用网上的Json相关库，而是用的字符串拼接，用起来比较麻烦。</span></span><br><span class="line">        <span class="type">const</span> std::string body = <span class="string">&quot;&#123;\&quot;IsCorrection\&quot;: 1, \&quot;ImageBase64\&quot;: \&quot;&quot;</span> + imgBase64 + <span class="string">&quot;\&quot;&#125;&quot;</span>;</span><br><span class="line">        <span class="type">const</span> <span class="keyword">auto</span> response = request.<span class="built_in">send</span>(<span class="string">&quot;POST&quot;</span>, body, &#123;</span><br><span class="line">        &#123;<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>&#125;</span><br><span class="line">    &#125;);</span><br><span class="line">        std::cout &lt;&lt; std::string&#123; response.body.<span class="built_in">begin</span>(), response.body.<span class="built_in">end</span>() &#125; &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// print the result</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (<span class="type">const</span> std::exception&amp; e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Request failed, error: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/" data-id="clesmpjbq0001qcug4n7ff477" data-title="OCR接口使用文档" class="article-share-link">Share</a>
-      
-      
-      
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/03/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%85%BE%E8%AE%AF%E4%BA%91-api-%E5%B0%81%E8%A3%85%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">腾讯云 api 封装接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">请求参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IsCorrection-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.1.</span> <span class="nav-text">IsCorrection 参数说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.1.2.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">请求示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E5%8A%9F%E5%93%8D%E5%BA%94"><span class="nav-number">1.3.</span> <span class="nav-text">成功响应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data-%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.3.1.</span> <span class="nav-text">data 中的参数介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%93%8D%E5%BA%94"><span class="nav-number">1.4.</span> <span class="nav-text">错误响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E8%8E%B7%E5%8F%96"><span class="nav-number">1.5.</span> <span class="nav-text">密钥获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#paddle-%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">paddle 预训练模型接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-1"><span class="nav-number">2.1.</span> <span class="nav-text">请求参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E7%A4%BA%E4%BE%8B-1"><span class="nav-number">2.2.</span> <span class="nav-text">请求示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">具体实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">Python 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">Java 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nodejs-%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">Nodejs 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NET-%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.4.</span> <span class="nav-text">.NET 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go-%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.5.</span> <span class="nav-text">Go 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cpp-%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.6.</span> <span class="nav-text">Cpp 示例</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Xuanyu Zhu</p>
+  <div class="site-description" itemprop="description">Xuanyu Zhu Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xuanyu Zhu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
     </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2023/03/03/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
-  
-  
-</nav>
 
   
-</article>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li></ul>
-    </div>
-  </div>
+<script src="/js/schemes/muse.js"></script>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/03/03/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2023/03/02/OCR%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">OCR接口使用文档</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<script src="/js/next-boot.js"></script>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
 
 
 
 
 
-  </div>
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
 </body>
 </html>
