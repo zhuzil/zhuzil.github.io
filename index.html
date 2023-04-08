@@ -196,7 +196,7 @@
           <p>先简单介绍一下。<br>直接使用腾讯云或者百度云的接口的方法我就不过多赘述了，我觉得他们的开发文档写的蛮好，直接对着做就行了。我的工作主要就是将腾讯云的 api 接口进行了简单的封装，免去了环境配置和身份认证过程，只需要密钥和图片就能直接进行识别，甚至密钥也可以不用，大大方便了同学们的操作。<br>同时也在刘同学的帮助下实现了 paddlepaddle 模型的接口，后续还会再加上其他更多的预训练模型，提供更多的选择，同时后续我们还会将各个模型性能对比进行分析，为选择提供参考。<br>一些常用语言的 demo 在下方有<a href="#jtsl">具体实例</a>，复制粘贴就能用了。</p>
 <p>具体实例中是核心代码，在<a target="_blank" rel="noopener" href="https://github.com/zhuzil/ocrDemo.git">https://github.com/zhuzil/ocrDemo.git</a> 中有各个语言的demo工程文件，clone下来就能用了，不过不是很推荐吧，我的具体实例中的核心代码已经写的比较清楚了，复制过去比较好，下载的demo我感觉可能环境版本什么的出问题在你们的电脑上不一定能跑通。</p>
 <h2 id="腾讯云-api-封装接口"><a href="#腾讯云-api-封装接口" class="headerlink" title="腾讯云 api 封装接口"></a>腾讯云 api 封装接口</h2><blockquote>
-<p><strong>URL</strong>：<code>https://www.7-an.com/api/ocr</code><br><strong>Method</strong>：<code>POST</code></p>
+<p><strong>URL</strong>：<code>https://www.7-an.com:5000/api/ocr</code><br><strong>Method</strong>：<code>POST</code></p>
 </blockquote>
 <h3 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h3><table>
 <thead>
@@ -297,7 +297,7 @@
 </ol>
 <h2 id="paddle-预训练模型接口"><a href="#paddle-预训练模型接口" class="headerlink" title="paddle 预训练模型接口"></a>paddle 预训练模型接口</h2><blockquote>
 <ul>
-<li><strong>URL</strong>：<code>https://www.7-an.com/api/paddle</code></li>
+<li><strong>URL</strong>：<code>https://www.7-an.com:5000/api/paddle</code></li>
 <li><strong>Method</strong>：<code>POST</code></li>
 </ul>
 </blockquote>
