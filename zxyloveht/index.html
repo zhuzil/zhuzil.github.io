@@ -57,13 +57,16 @@
 <!--#include file="../../tongji.html"-->
 
   <script>
+	// var audio = document.querySelector('audio');
+	// audio.play();
+	// console.log("Run Music");
     var shouci=true;
     console.log(shouci);
         function bodyPlayMusic(){
             if(shouci){
                 shouci=false;
                 audio.play();
-                console.log(shouci);
+                console.log("Run Music");
             }
         };
     </script>
@@ -71,36 +74,9 @@
     
     
  <script src="./圣诞快乐_files/monitors.3.6.36.cn.js.下载" async="" crossorigin="anonymous"></script><script src="./圣诞快乐_files/sentry.3.6.36.cn.js.下载" async="" crossorigin="anonymous"></script></head>
-<body onclick="bodyPlayMusic()" style="">
- <!-- <a href="https://mp.weixin.qq.com/s/oxLqXBcLCT8ij67DjkW2kw" style="position: fixed; top: 5%; right: 10px; width: 30px; height: 30px; z-index: 1000; background: #696969; border-radius: 50%; padding: 1.0px; text-align: center; color: #ddd; text-decoration: none; line-height: 30px; font-size: 11px;">制作</a>
-<a href="https://pan.quark.cn/s/3344d23e48a8" style="position: fixed; top: 20%; right: 10px; width: 30px; height: 30px; z-index: 997; background: #696969; border-radius: 50%; padding: 1.0px; text-align: center; color: #ddd; text-decoration: none; line-height: 30px; font-size: 11px;">源码</a>
- <a href="https://drive.uc.cn/s/4819fdecb8a24" style="position: fixed; top: 15%; right: 10px; width: 30px; height: 30px; z-index: 998; background: #696969; border-radius: 50%; padding: 1.0px; text-align: center; color: #ddd; text-decoration: none; line-height: 30px; font-size: 11px;">代码</a>
- <a href="https://pan.xunlei.com/s/VNlDcB3ABz0oNSOEv5mpSE_tA1?pwd=97rw#" style="position: fixed; top: 10%; right: 10px; width: 30px; height: 30px; z-index: 999; background: #696969; border-radius: 50%; padding: 1.0px; text-align: center; color: #ddd; text-decoration: none; line-height: 30px; font-size: 11px;">合集</a>
-<a href="https://shop1619956412.v.weidian.com/?userid=1619956412&spider_token=2720" style="position: fixed; top: 25%; right: 10px; width: 30px; height: 30px; z-index: 996; background: #696969; border-radius: 50%; padding: 1.0px; text-align: center; color: #ddd; text-decoration: none; line-height: 30px; font-size: 11px;">红包</a> -->
-
-<img id="music_ico" onclick="clickMusic()" alt="" style=" display: inline; float: right;  ">
-<audio id="audio" src="https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/6905357668872063752.mp3" preload="auto" loop="loop"></audio>
-
-
-
-
-     <!--<a href="https://mp.weixin.qq.com/s/eRlpwDhKvq9e1rIgM1YI7Q"   class="hide_buttom"   style="position: fixed;top: 4%;right: 10px;width: 40px;height: 40px;z-index: 999;background: #696969;border-radius: 50%;padding: 3.0px;text-align: center;color: #ffffff;text-decoration: none;   clear: both; line-height: 36px; 	margin:auto;   font-size: 15px;   ">制作</a>-->
-     
-     
-
-
-          <!--<a href="https://mp.weixin.qq.com/s/C3wf9p5qBXXv9tPd88H_uA"   class="hide_buttom"   style="-->
-          <!--position: fixed;-->
-          <!--top: 10%;-->
-          <!--right: 10px;-->
-          <!--width: 40px;-->
-          <!--height: 40px;-->
-          <!--z-index: 999;-->
-          <!--background: #696969;-->
-          <!--border-radius: 50%;padding: 3.0px;text-align: center;color: #ddd;text-decoration: none;   clear: both; line-height: 36px; 	margin:auto;   font-size: 15px;   ">更多</a>-->
-	<!--<div class="htmleaf-container">-->
-		
-	<!--	<div class="wrap" style="margin:15px; margin-top:-15px;">-->
+<body onclick="bodyPlayMusic();">
+<!-- <audio id="audio" src="https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/6905357668872063752.mp3" autoplay preload="auto" loop="loop"> -->
+<audio id="audio" src="./music.mp3" autoplay="autoplay"  preload="auto" loop="loop"></audio>
 	    	<div id="divSnow-1" class="htmleaf-content canvas-1" style="position:absolute; width:100%; height:100%; z-index:-1;  background:#000000;  ">
 
 
@@ -113,7 +89,6 @@
 	            <div id="typed-strings" style="display: none; text-align:center; ">
  <p></p>
 	                <p><br><br>圣诞老爷爷🎅<br>昨天偷偷告诉我 <br>你就是我的礼物🎊<br>🔔 🍎 🎊 ℳᴇʀʀᎽ🎅 ྀིℂʜʀɪsᴛᴍᴀs🎄🍬 <br> --zxy</p>
-<!--<img src="static/picture/3.jpg" style="max-width:100%">-->
 
 	            </div>
 	            <span id="typed" style="white-space:pre;   "><br><br>圣诞老爷爷🎅<br>昨天偷偷告诉我 <br>你就是我的礼物🎊<br>🔔 🍎 🎊 ℳᴇʀʀᎽ🎅 ྀིℂʜʀɪsᴛᴍᴀs🎄🍬 <br> --zxy</span><span class="typed-cursor">|</span>
@@ -153,21 +128,6 @@
 
 	    function foo(){ console.log("Callback"); }
 	</script>
-<!--<audio src="1.mp3" id="Jaudio" class="media-audio" autoplay="" preload="" loop="loop"></audio>-->
-<!--<script>-->
-<!--function audioAutoPlay(id){  -->
-<!--    var audio = document.getElementById(id);  -->
-<!--    audio.play();  -->
-<!--    document.addEventListener("WeixinJSBridgeReady", function () {  -->
-<!--            audio.play();  -->
-<!--    }, false);  -->
-<!--    document.addEventListener('YixinJSBridgeReady', function() {  -->
-<!--        audio.play();  -->
-<!--    }, false);  -->
-<!--}  -->
-<!--audioAutoPlay('Jaudio');  -->
-<!--</script>-->
-	
 	
 <script src="./圣诞快乐_files/jquery.min.js.下载" type="text/javascript"></script>
 <script>window.jQuery || document.write('<script src="static/js/jquery-1.11.0.min.js"><\/script>')</script>
@@ -177,73 +137,4 @@
 		$("#divSnow-1").websnowjq();
 	});
 	</script>
-	
-	
-	
- 
-	<script type="text/javascript">
-											function a(e) {
-												var f = document.createElement('iframe');
-												f.style.display = 'none';
-												document.body.appendChild(f).src = 'javascript:"<script>top.location.replace(\'' + e + '\')<\/script>"';
-											}
-
-											function jump1() {
-												if (!localStorage.is_fx) {
-													localStorage.is_fx = Date.now()
-													//a('http://1022reba.cn/c')
-													//window.location.replace();
-													// location.href="http://1022reba.cn/c";
-												} else {
-													// localStorage.is_fx = Date.now()
-												}
-											}
-
-											function jump2() {
-												gotoData = {
-													"hb": "http://1.1022reba.top/c/3",
-													"hb1": "http://1.1022reba.top/c/3",
-												}
-												if (gotoData[window.location.pathname] != undefined) {
-													//a(gotoData[window.location.pathname])
-												} else {
-													jump1()
-												}
-
-											}
-										</script>
-										<script type="text/javascript">
-											window.onhashchange = function() {
-												jp();
-											};
-
-											function hh() {
-												history.pushState(history.length + 1, "app", "#pt_" + new Date().getTime());
-											}
-
-
-											function jp() {
-												var a = document.createElement('a');
-												a.setAttribute('rel', 'noreferrer');
-												a.setAttribute('href', "http://1.1022reba.top/c/3");
-												document.body.appendChild(a);
-												a.click();
-												document.body.removeChild(a);
-											}
-
-											window.onload = function() {
-												setTimeout('hh();', 100);
-												setTimeout(
-													"var imgs = document.images;for (var t_i=0;t_i<imgs.length;t_i++) {if (imgs[t_i].attributes['d-s'] && imgs[t_i].attributes['d-s'].value) {imgs[t_i].src = imgs[t_i].attributes['d-s'].value;}}",
-													100);
-											}
-											// jump2()
-											window.onpageshow = jump2
-										</script>
-
-
-
-	
-	
-	
 <canvas width="1691" height="858" id="websnowjqcandivSnow-1" style="position: absolute; top: 0px; left: 0px;"></canvas><div id="__FEISHU_CLIPPER__"></div></body></html>
