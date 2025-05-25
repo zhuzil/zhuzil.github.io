@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业微信主页</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #3879D9;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .profile-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .profile-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .profile-school {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .verified-icon {
+            color: #3879D9;
+            margin-left: 5px;
+        }
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .profile-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .profile-detail:last-child {
+            border-bottom: none;
+        }
+        .icon-text {
+            display: flex;
+            align-items: center;
+        }
+        .icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            margin-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            font-size: 20px;
+        }
+        .yellow-icon {
+            background-color: #FFEBB7;
+            color: #FF9500;
+        }
+        .red-icon {
+            background-color: #FFDBDB;
+            color: #FF3B30;
+        }
+        .orange-icon {
+            background-color: #FFD9B7;
+            color: #FF9500;
+        }
+        .blue-icon {
+            background-color: #D1E5FF;
+            color: #007AFF;
+        }
+        .grey-icon {
+            background-color: #E5E5EA;
+            color: #5856D6;
+        }
+        .arrow {
+            color: #C7C7CC;
+        }
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8E8E93;
+            font-size: 12px;
+        }
+        .nav-item.active {
+            color: #007AFF;
+        }
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #FF3B30;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>我</h1>
+    </div>
+
+    <div class="container">
+        <a href="information.html" style="text-decoration: none; color: inherit;">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div>
+                        <div class="profile-school">
+                            北京体育大学 <span class="verified-icon">✓</span>
+                        </div>
+                        <h2 class="profile-name">王海冰</h2>
+                    </div>
+                    <img src="moon_profile.jpg" alt="头像" class="avatar" onerror="this.src='https://via.placeholder.com/70/FFBB00/000000?text=月'">
+                </div>
+                <div class="profile-detail">
+                    <span>对外名片</span>
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+        </a>
+
+        <div class="profile-card">
+            <div class="profile-detail">
+                <div class="icon-text">
+                    <div class="icon yellow-icon">📦</div>
+                    <span>收藏</span>
+                </div>
+                <span class="arrow">›</span>
+            </div>
+            <div class="profile-detail">
+                <div class="icon-text">
+                    <div class="icon red-icon">🧧</div>
+                    <span>红包</span>
+                </div>
+                <span class="arrow">›</span>
+            </div>
+            <div class="profile-detail">
+                <div class="icon-text">
+                    <div class="icon orange-icon">📍</div>
+                    <span>通勤</span>
+                </div>
+                <div>
+                    <span class="badge">在用</span>
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-card">
+            <div class="profile-detail">
+                <div class="icon-text">
+                    <div class="icon blue-icon">💬</div>
+                    <span>帮助</span>
+                </div>
+                <span class="arrow">›</span>
+            </div>
+            <div class="profile-detail">
+                <div class="icon-text">
+                    <div class="icon grey-icon">⚙️</div>
+                    <span>设置</span>
+                </div>
+                <span class="arrow">›</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-item">
+            <div class="nav-icon">
+                💬
+                <div class="badge">22</div>
+            </div>
+            <span>消息</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">
+                ✉️
+            </div>
+            <span>邮件</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">
+                👥
+            </div>
+            <span>通讯录</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon">
+                📊
+            </div>
+            <span>工作台</span>
+        </div>
+        <div class="nav-item active">
+            <div class="nav-icon">
+                👤
+            </div>
+            <span>我</span>
+        </div>
+    </div>
+</body>
+</html>
