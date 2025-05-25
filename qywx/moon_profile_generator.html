@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>月亮头像</title>
+    <style>
+        canvas {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="moonCanvas" width="100" height="100"></canvas>
+    <script>
+        const canvas = document.getElementById('moonCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 设置背景
+        ctx.fillStyle = '#000033';
+        ctx.fillRect(0, 0, 100, 100);
+        
+        // 绘制月亮
+        ctx.beginPath();
+        ctx.fillStyle = '#FFDB58';
+        ctx.arc(50, 50, 30, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // 绘制一个剪影
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.moveTo(65, 70);
+        ctx.lineTo(65, 90);
+        ctx.lineTo(60, 90);
+        ctx.lineTo(60, 85);
+        ctx.lineTo(55, 85);
+        ctx.lineTo(55, 90);
+        ctx.lineTo(70, 90);
+        ctx.lineTo(70, 70);
+        ctx.closePath();
+        ctx.fill();
+        
+        // 导出为图片
+        const dataURL = canvas.toDataURL('image/png');
+        const img = new Image();
+        img.src = dataURL;
+        document.body.appendChild(img);
+    </script>
+</body>
+</html>

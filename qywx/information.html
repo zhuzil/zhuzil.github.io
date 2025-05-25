@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #3879D9;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .back-button {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .header-title {
+            font-size: 18px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .info-card {
+            background-color: white;
+            margin-bottom: 10px;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            color: #333;
+            font-size: 16px;
+        }
+        .info-value {
+            color: #8E8E93;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .arrow {
+            margin-left: 10px;
+            color: #C7C7CC;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            color: #3879D9;
+        }
+        .education-detail {
+            color: #8E8E93;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-button">←</a>
+        <h1 class="header-title">个人信息</h1>
+    </div>
+
+    <div class="container">
+        <div class="info-card">
+            <div class="info-item">
+                <div class="info-label">头像</div>
+                <div class="info-value">
+                    <img src="moon_profile.jpg" alt="头像" class="avatar" onerror="this.src='https://via.placeholder.com/80/FFBB00/000000?text=月'">
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-item">
+                <div class="info-label">姓名</div>
+                <div class="info-value">
+                    王海冰
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-label">性别</div>
+                <div class="info-value">
+                    男
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-item">
+                <div class="info-label">对外信息显示</div>
+                <div class="info-value">
+                    王海冰@北京体育大学
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-item">
+                <div class="info-label">工作签名</div>
+                <div class="info-value">
+                    <span class="icon">💬</span> 努力学习中
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-label">所在企业</div>
+                <div class="info-value">
+                    <span class="icon" style="color: #3879D9;">✓</span> 北京体育大学
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-label">发票抬头</div>
+                <div class="info-value">
+                    <span class="arrow">›</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-item">
+                <div class="info-label">人文学院</div>
+                <div class="info-value">
+                    <span class="arrow">›</span>
+                </div>
+                <div style="width: 100%;">
+                    <div class="education-detail">北京体育大学(国家体育总局教练员学院)/本科生</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
