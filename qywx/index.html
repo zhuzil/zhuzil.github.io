@@ -45,7 +45,7 @@
             color: #333;
             margin: 10px 0;
             display: flex;
-            align-items: center;
+            /* align-items: ; */
         }
         .verified-icon {
             color: #3879D9;
@@ -75,13 +75,13 @@
         .icon {
             width: 40px;
             height: 40px;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
             border-radius: 10px;
             margin-right: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #333;
+            color: #ffffff;
             font-size: 20px;
         }
         .yellow-icon {
@@ -159,16 +159,22 @@
             <div class="profile-card">
                 <div class="profile-header">
                     <div>
-                        <div class="profile-school">
+                        <div class="profile-school"  style="height: 80px;">
                             北京体育大学 <span class="verified-icon"><img src="img_gou.png" alt="验证" class="icon" style="width: 17px; height: 20px;"></span>
                         </div>
+                        <!-- 这中间有很大的gap -->
+
                         <h2 class="profile-name">王海冰</h2>
                     </div>
                     <img src="img_tx.png" alt="头像" class="avatar" onerror="this.src='https://via.placeholder.com/70/FFBB00/000000?text=月'">
                 </div>
-                <div class="profile-detail">
-                    <span>对外名片</span>
-                    <span class="arrow">›</span>
+                <div class="profile-detail" style="border-top: 1px solid #eee; padding-top: 10px;">
+                    <!-- 字体改成灰色 -->
+                    <span style="color: #8E8E93;">对外名片</span>
+                    <div style="float: right;">
+                        <img src="img_q.png" alt="二维码" style="width: 20px; height: 20px; vertical-align: middle;">
+                        <span class="arrow" style="font-size: 20px; margin-left: 4px;">›</span>
+                    </div>
                 </div>
             </div>
         </a>
@@ -176,26 +182,28 @@
         <div class="profile-card">
             <div class="profile-detail">
                 <div class="icon-text">
-                    <div class="icon yellow-icon">📦</div>
+                    <div class="icon">
+                        <img src="img_sc.png" style="width: 35px; height: 35px; vertical-align: middle;">
+                    </div>
                     <span>收藏</span>
                 </div>
-                <span class="arrow">›</span>
+                <span class="arrow" style="font-size: 20px;">›</span>
             </div>
             <div class="profile-detail">
                 <div class="icon-text">
-                    <div class="icon red-icon">🧧</div>
+                    <div class="icon">
+                        <img src="img_hb.png" style="width: 35px; height: 35px; vertical-align: middle;">
+                    </div>
                     <span>红包</span>
                 </div>
-                <span class="arrow">›</span>
+                <span class="arrow" style="font-size: 20px;">›</span>
             </div>
             <div class="profile-detail">
                 <div class="icon-text">
-                    <div class="icon orange-icon">📍</div>
+                    <div class="icon">
+                        <img src="img_tq.png" style="width: 35px; height: 35px; vertical-align: middle;">
+                    </div>
                     <span>通勤</span>
-                </div>
-                <div>
-                    <span class="badge">在用</span>
-                    <span class="arrow">›</span>
                 </div>
             </div>
         </div>
@@ -203,51 +211,59 @@
         <div class="profile-card">
             <div class="profile-detail">
                 <div class="icon-text">
-                    <div class="icon blue-icon">💬</div>
+                    <div class="icon">
+                        <img src="img_bz.png" style="width: 35px; height: 35px; vertical-align: middle;">
+                    </div>
                     <span>帮助</span>
                 </div>
-                <span class="arrow">›</span>
+                <span class="arrow" style="font-size: 20px;">›</span>
             </div>
             <div class="profile-detail">
                 <div class="icon-text">
-                    <div class="icon grey-icon">⚙️</div>
+                    <div class="icon">
+                        <img src="img_sz.png" style="width: 35px; height: 35px; vertical-align: middle;">
+                    </div>
                     <span>设置</span>
                 </div>
-                <span class="arrow">›</span>
+                <span class="arrow" style="font-size: 20px;">›</span>
             </div>
         </div>
     </div>
 
     <div class="nav-bar">
         <div class="nav-item">
-            <div class="nav-icon">
+            <!-- <div class="nav-icon">
                 💬
                 <div class="badge">22</div>
-            </div>
+            </div> -->
+            <!-- <div class="icon"> -->
+                <img src="img_qp.png" style="width: 30px; height: 30px; vertical-align: middle;">
+                <!-- <div class="badge">22</div> -->
+            <!-- </div> -->
             <span>消息</span>
         </div>
         <div class="nav-item">
-            <div class="nav-icon">
-                ✉️
-            </div>
+            <!-- <div class="icon"> -->
+                        <img src="img_yj.png" style="width: 30px; height: 30px; vertical-align: middle;">
+                    <!-- </div> -->
             <span>邮件</span>
         </div>
         <div class="nav-item">
-            <div class="nav-icon">
-                👥
-            </div>
+            <!-- <div class="icon"> -->
+                        <img src="img_txl.png" style="width: 30px; height: 30px; vertical-align: middle;">
+                    <!-- </div> -->
             <span>通讯录</span>
         </div>
         <div class="nav-item">
-            <div class="nav-icon">
-                📊
-            </div>
+            <!-- <div class="icon"> -->
+                <img src="img_gzt.png" style="width: 30px; height: 30px; vertical-align: middle;">
+            <!-- </div> -->
             <span>工作台</span>
         </div>
         <div class="nav-item active">
-            <div class="nav-icon">
-                👤
-            </div>
+            <!-- <div class="icon"> -->
+                <img src="img_w.png" style="width: 30px; height: 30px; vertical-align: middle;">
+            <!-- </div> -->
             <span>我</span>
         </div>
     </div>
